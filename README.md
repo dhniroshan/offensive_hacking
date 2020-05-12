@@ -48,9 +48,11 @@ Unfortunately, Joe Vennix from Apple Information Security found that the functio
 ### POC
 
 sudo version
+
 ![](Images/1.PNG)
 
 Create a user 'ohts'
+
 ![](Images/2.PNG)
 
 Modify the sudoers file
