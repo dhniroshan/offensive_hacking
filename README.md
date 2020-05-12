@@ -17,11 +17,8 @@ On October 14, the Sudo team published a security alert about CVE-2019-14287, a 
 ### How user information is stored in Linux
 
 Each user account has a username, unique identifier (UID), group(GID), home directory, and the default shell to be used when the user logs in to the system.
-
 All user account related information is stored in the passwd file, located in /etc/passwd
-
 Passwords in the passwd file are encrypted and are therefore represented by an x.
-
 The encrypted passwords for accounts are stored in the shadow file, located in /etc/shadow. The shadow file can only be accessed by the root user.
 
 ### Structure of user account
@@ -49,6 +46,31 @@ This entry means that user jacob is allowed to run “chmod” as any user excep
 Unfortunately, Joe Vennix from Apple Information Security found that the function fails to parse all values correctly and when giving the parameter user id “-1” or its unsigned number “4294967295”, the command will run as root, bypassing the security policy entry we set in the example above. 
 
 ### POC
+
+sudo version
+![](Images/1.PNG)
+
+Create a user 'ohts'
+![](Images/2.PNG)
+
+Modify the sudoers file
+```
+visudo
+ohts  ALL=(ALL, !root) /usr/bin/id
+```
+![](Images/5.PNG)
+
+Change the user to 'ohts'
+then run 'id' command as 'temp' user
+but when we run 'id' command as 'root', permision denied.
+
+![](Images/3.PNG)
+
+But when we run the command with '-1' or '4294967295' it will run as root
+
+![](Images/4.PNG)
+
+
 
 
 
